@@ -41,16 +41,6 @@ body {
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarNav">
-				<ul class="navbar-nav ms-auto">
-					<li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Features</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Pricing</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">Contact
-							Us</a></li>
-				</ul>
-			</div>
 		</div>
 	</nav>
 
@@ -88,6 +78,11 @@ body {
 						</div>
 					</form>
 				</div>
+				<!-- Alertas -->
+				<c:if test="${not empty alertMessage}">
+					<div class="alert alert-${alertVariant} mt-2" role="alert">
+						${alertMessage}</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

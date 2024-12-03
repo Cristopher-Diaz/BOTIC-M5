@@ -113,8 +113,7 @@ body {
 								placeholder="Ingrese su nuevamente su contraseña" required>
 						</div>
 						<div class="d-grid">
-							<button type="submit" class="btn btn-primary">Iniciar
-								sesión</button>
+							<button type="submit" class="btn btn-primary">Crear usuario</button>
 						</div>
 
 					</form>

@@ -7,6 +7,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
+
+import com.edutecno.dao.UsuarioDAO;
 
 /**
  * Servlet implementation class Login
@@ -14,6 +17,7 @@ import java.io.IOException;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UsuarioDAO usuarioDAO = new UsuarioDAO();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,6 +43,42 @@ public class Login extends HttpServlet {
 		System.out.println(userName);
 		String password = request.getParameter("password");
 		System.out.println(password);
+		
+		boolean existUserInDB = false;
+		try {
+			existUserInDB = usuarioDAO.getUserToLogin(userName);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		boolean isValidUser = false;
+		try {
+			isValidUser = usuarioDAO.validateUserCredentials(userName, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		System.out.println("Existe usuario en la DB");
+//		System.out.println(existUserInDB);
+//		
+//		System.out.println("El usuario esta logeado de forma correcta");
+//		System.out.println(isValidUser);
+		
+		if (!existUserInDB) {
+			System.out.println("El usuario no existe en la DB");
+			return;
+		}
+		
+		if (existUserInDB && !isValidUser) {
+			System.out.println("Contraseña incorrecta");
+			return;
+		}
+		
+		if(existUserInDB && isValidUser) {
+			System.out.println("El usuario esta logeado de forma correcta");
+		}
+		
 	}
 
 }

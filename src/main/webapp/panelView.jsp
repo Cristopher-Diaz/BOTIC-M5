@@ -57,45 +57,50 @@ body {
 				<h2 class="fw-bold">Bienvenido ${userName}</h2>
 				<p class="text-muted">Panel de administrador</p>
 				<div class="row mt-5">
+					<!-- Opción 1 -->
 					<div class="col-md-6 col-lg-3">
 						<div class="d-flex align-items-center justify-content-center mb-3">
 							<i class="bi bi-star fs-2 text-primary"></i>
 						</div>
-						<h5 class="fw-bold">Bootstrap 5</h5>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis
-							vitae leo.</p>
+						<h5 class="fw-bold">Conoce tu animal</h5>
+						<p class="text-muted">Elige esta opción para revisar cuál es
+							tu animal</p>
+						<a href="ConoceAnimalServlet" class="btn btn-primary">Ir</a>
 					</div>
+					<!-- Opción 2 -->
 					<div class="col-md-6 col-lg-3">
 						<div class="d-flex align-items-center justify-content-center mb-3">
-							<i class="bi bi-pencil fs-2 text-primary"></i>
+							<i class="bi bi-people fs-2 text-info"></i>
 						</div>
-						<h5 class="fw-bold">Customizable</h5>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis
-							vitae leo.</p>
+						<h5 class="fw-bold">Buscar usuarios</h5>
+						<p class="text-muted">Con esta opción podrás listar a todos
+							los usuarios</p>
+						<a href="BuscarUsuariosServlet" class="btn btn-primary">Ir</a>
 					</div>
+					<!-- Opción 3 -->
 					<div class="col-md-6 col-lg-3">
 						<div class="d-flex align-items-center justify-content-center mb-3">
-							<i class="bi bi-phone fs-2 text-primary"></i>
+							<i class="bi bi-gear fs-2 text-warning"></i>
 						</div>
-						<h5 class="fw-bold">Responsive</h5>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis
-							vitae leo.</p>
+						<h5 class="fw-bold">Modificar datos</h5>
+						<p class="text-muted">Usa esta herramienta para EDITAR tu
+							usuario</p>
+						<a href="ModificarDatosServlet" class="btn btn-primary">Ir</a>
 					</div>
+					<!-- Opción 4 -->
 					<div class="col-md-6 col-lg-3">
 						<div class="d-flex align-items-center justify-content-center mb-3">
-							<i class="bi bi-arrow-repeat fs-2 text-primary"></i>
+							<i class="bi bi-trash fs-2 text-danger"></i>
 						</div>
-						<h5 class="fw-bold">All Browser Compatibility</h5>
-						<p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-							adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis
-							vitae leo.</p>
+						<h5 class="fw-bold">Eliminar cuenta</h5>
+						<p class="text-muted">Usa esta herramienta para ELIMINAR tu
+							usuario</p>
+						<a href="EliminarCuentaServlet" class="btn btn-primary">Ir</a>
 					</div>
 				</div>
 			</div>
 		</section>
+
 	</div>
 
 	<!-- Footer -->

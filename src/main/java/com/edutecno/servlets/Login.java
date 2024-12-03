@@ -35,20 +35,8 @@ public class Login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Obtener la sesión
-		HttpSession session = request.getSession(false);
-
-		if (session != null && session.getAttribute("userName") != null) {
-			// Si hay sesión activa, redirigir al panel
-			RequestDispatcher dispatcher = request.getRequestDispatcher("panelView.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			// No hay sesión activa, forzar el inicio de sesión
-			request.setAttribute("alertMessage", null);
-			request.setAttribute("alertVariant", null);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
-			dispatcher.forward(request, response);
-		}
+//		Redireccion al servlet que verifica la sesión y ejecuta la vista correspondiente
+        response.sendRedirect("CheckSession");
 	}
 
 	/**

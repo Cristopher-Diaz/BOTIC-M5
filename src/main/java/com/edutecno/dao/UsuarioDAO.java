@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.edutecno.modelo.Horoscopo;
 import com.edutecno.modelo.Usuario;
@@ -57,36 +58,70 @@ public class UsuarioDAO {
 	}
 
 	public static Usuario getUser(String userName) throws SQLException {
-	    String sql = """
-	            SELECT *
-	            FROM usuarios u
-	            WHERE u.user_name = ?
-	            """;
-	    Usuario user = null; 
+		String sql = """
+				SELECT *
+				FROM usuarios u
+				WHERE u.user_name = ?
+				""";
+		Usuario user = null;
 
-	    try (Connection connection = DBConnection.getConnection();
-	         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-	        preparedStatement.setString(1, userName);
+		try (Connection connection = DBConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, userName);
 
-	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
-	            if (resultSet.next()) {
-	                int id = resultSet.getInt("id");
-	                String nombre = resultSet.getString("nombre");
-	                String user_name = resultSet.getString("user_name");
-	                String email = resultSet.getString("email");
-	                LocalDate fechaNacimiento = null;
-	                if (resultSet.getDate("fecha_nacimiento") != null) {
-	                    fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
-	                }
-	                String password = resultSet.getString("password");
-	                String animal = resultSet.getString("animal");
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					int id = resultSet.getInt("id");
+					String nombre = resultSet.getString("nombre");
+					String user_name = resultSet.getString("user_name");
+					String email = resultSet.getString("email");
+					LocalDate fechaNacimiento = null;
+					if (resultSet.getDate("fecha_nacimiento") != null) {
+						fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
+					}
+					String password = resultSet.getString("password");
+					String animal = resultSet.getString("animal");
 
-	                user = new Usuario(id, nombre, user_name, email, fechaNacimiento, password, animal);
-	            }
-	        }
-	    }
+					user = new Usuario(id, nombre, user_name, email, fechaNacimiento, password, animal);
+				}
+			}
+		}
 
-	    return user;
+		return user;
+	}
+
+	public static ArrayList getAllUsers() {
+		String sql = """
+				SELECT *
+				FROM usuarios u
+				WHERE u.deleted_at IS null
+				""";
+		ArrayList<Usuario> usuarios = new ArrayList<>();
+
+		try (Connection connection = DBConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				ResultSet resultSet = preparedStatement.executeQuery()) {
+
+			while (resultSet.next()) {
+				int id = resultSet.getInt("id");
+				String nombre = resultSet.getString("nombre");
+				String userName = resultSet.getString("user_name");
+				String email = resultSet.getString("email");
+				LocalDate fechaNacimiento = null;
+				if (resultSet.getDate("fecha_nacimiento") != null) {
+					fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
+				}
+				String password = resultSet.getString("password");
+				String animal = resultSet.getString("animal");
+
+				Usuario usuario = new Usuario(id, nombre, userName, email, fechaNacimiento, password, animal);
+				usuarios.add(usuario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return usuarios;
 	}
 
 	public boolean createUser(String name, String userName, String email, String birthDate, String password,

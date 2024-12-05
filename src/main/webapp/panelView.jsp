@@ -75,7 +75,7 @@ body {
 						<h5 class="fw-bold">Buscar usuarios</h5>
 						<p class="text-muted">Con esta opción podrás listar a todos
 							los usuarios</p>
-						<a href="BuscarUsuariosServlet" class="btn btn-primary">Ir</a>
+						<a href="SearchUsers" class="btn btn-primary">Ir</a>
 					</div>
 					<!-- Opción 3 -->
 					<div class="col-md-6 col-lg-3">

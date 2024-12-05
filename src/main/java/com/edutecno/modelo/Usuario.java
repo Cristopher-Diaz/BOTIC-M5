@@ -1,17 +1,18 @@
 package com.edutecno.modelo;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Usuario {
 	private int id;
 	private String nombre;
 	private String username;
 	private String email;
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	private String password;
 	private String animal;
 
-	public Usuario(int id, String nombre, String username, String email, Date fechaNacimiento, String password,
+	public Usuario(int id, String nombre, String username, String email, LocalDate fechaNacimiento, String password,
 			String animal) {
 		this.id = id;
 		this.nombre = nombre;
@@ -54,11 +55,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
+	public void setFechaNacimiento(LocalDate fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 

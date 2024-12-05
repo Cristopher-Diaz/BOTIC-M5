@@ -65,7 +65,7 @@ body {
 						<h5 class="fw-bold">Conoce tu animal</h5>
 						<p class="text-muted">Elige esta opción para revisar cuál es
 							tu animal</p>
-						<a href="ConoceAnimalServlet" class="btn btn-primary">Ir</a>
+						<a href="ConsultHoroscope" class="btn btn-primary">Ir</a>
 					</div>
 					<!-- Opción 2 -->
 					<div class="col-md-6 col-lg-3">

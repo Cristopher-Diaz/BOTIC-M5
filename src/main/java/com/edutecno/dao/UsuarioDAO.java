@@ -6,7 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
+import com.edutecno.modelo.Horoscopo;
+import com.edutecno.modelo.Usuario;
 import com.edutecno.procesaconexion.DBConnection;
 
 public class UsuarioDAO {
@@ -28,29 +31,62 @@ public class UsuarioDAO {
 
 		return existUserInDB;
 	}
-	
+
 	public boolean validateUserCredentials(String userName, String password) throws SQLException {
-	    boolean isValidUser = false;
+		boolean isValidUser = false;
+		String sql = """
+				SELECT
+				    u.user_name AS user_name
+				FROM usuarios u
+				WHERE u.user_name = ?
+				AND u.password = ?
+				""";
+
+		try (Connection connection = DBConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+			preparedStatement.setString(1, userName);
+			preparedStatement.setString(2, password);
+			try (ResultSet resultSet = preparedStatement.executeQuery()) {
+				if (resultSet.next()) {
+					isValidUser = true;
+				}
+			}
+		}
+
+		return isValidUser;
+	}
+
+	public static Usuario getUser(String userName) throws SQLException {
 	    String sql = """
-	            SELECT
-	                u.user_name AS user_name
+	            SELECT *
 	            FROM usuarios u
 	            WHERE u.user_name = ?
-	            AND u.password = ?
 	            """;
+	    Usuario user = null; 
 
 	    try (Connection connection = DBConnection.getConnection();
 	         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 	        preparedStatement.setString(1, userName);
-	        preparedStatement.setString(2, password);
+
 	        try (ResultSet resultSet = preparedStatement.executeQuery()) {
 	            if (resultSet.next()) {
-	            	isValidUser = true;
+	                int id = resultSet.getInt("id");
+	                String nombre = resultSet.getString("nombre");
+	                String user_name = resultSet.getString("user_name");
+	                String email = resultSet.getString("email");
+	                LocalDate fechaNacimiento = null;
+	                if (resultSet.getDate("fecha_nacimiento") != null) {
+	                    fechaNacimiento = resultSet.getDate("fecha_nacimiento").toLocalDate();
+	                }
+	                String password = resultSet.getString("password");
+	                String animal = resultSet.getString("animal");
+
+	                user = new Usuario(id, nombre, user_name, email, fechaNacimiento, password, animal);
 	            }
 	        }
 	    }
 
-	    return isValidUser;
+	    return user;
 	}
 
 	public boolean createUser(String name, String userName, String email, String birthDate, String password,

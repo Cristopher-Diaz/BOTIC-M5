@@ -17,6 +17,9 @@
 <style>
 body {
 	background-color: #f8f9fa; /* Color de fondo claro */
+	display: grid;
+	min-height: 100dvh;
+	grid-template-rows: auto 1fr auto;
 }
 
 .card {

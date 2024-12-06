@@ -20,6 +20,9 @@
 <style>
 body {
 	background-color: #f8f9fa; /* Color de fondo claro */
+	display: grid;
+	min-height: 100dvh;
+	grid-template-rows: auto 1fr auto;
 }
 
 .card {
@@ -113,7 +116,8 @@ body {
 								placeholder="Ingrese su nuevamente su contraseña" required>
 						</div>
 						<div class="d-grid">
-							<button type="submit" class="btn btn-primary">Crear usuario</button>
+							<button type="submit" class="btn btn-primary">Crear
+								usuario</button>
 						</div>
 
 					</form>
@@ -123,7 +127,7 @@ body {
 					<div class="alert alert-warning mt-2" role="alert">
 						${errorMessage}</div>
 				</c:if>
-				
+
 				<c:if test="${not empty successMessage}">
 					<div class="alert alert-success mt-2" role="alert">
 						${successMessage}</div>

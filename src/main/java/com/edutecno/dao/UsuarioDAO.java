@@ -14,9 +14,9 @@ import com.edutecno.modelo.Usuario;
 import com.edutecno.procesaconexion.DBConnection;
 
 public class UsuarioDAO {
-	public boolean getUserToLogin(String userName) throws SQLException {
+	public boolean validateExistUser(String userName) throws SQLException {
 		boolean existUserInDB = false;
-		String sql = "SELECT u.user_name AS user_name FROM usuarios u WHERE u.user_name = '" + userName + "'";
+		String sql = "SELECT u.user_name AS user_name FROM usuarios u WHERE u.user_name = '" + userName + "' AND u.deleted_at IS NULL";
 
 		try (Connection conn = DBConnection.getConnection();
 				Statement stmt = conn.createStatement();
@@ -147,6 +147,26 @@ public class UsuarioDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
+		}
+	}
+
+	public boolean deleteUser(String userName) {
+		String sql = """
+				    UPDATE usuarios
+				    SET deleted_at = NOW()
+				    WHERE user_name = ? AND deleted_at IS NULL
+				""";
+
+		try (Connection connection = DBConnection.getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+			preparedStatement.setString(1, userName);
+
+			int rowsAffected = preparedStatement.executeUpdate();
+			return rowsAffected > 0; 
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false; // En caso de error, retorna false
 		}
 	}
 }

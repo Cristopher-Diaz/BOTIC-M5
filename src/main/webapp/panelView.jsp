@@ -17,6 +17,9 @@
 <style>
 body {
 	background-color: #f8f9fa; /* Color de fondo claro */
+	display: grid;
+	min-height: 100dvh;
+	grid-template-rows: auto 1fr auto;
 }
 
 .card {
@@ -95,7 +98,7 @@ body {
 						<h5 class="fw-bold">Eliminar cuenta</h5>
 						<p class="text-muted">Usa esta herramienta para ELIMINAR tu
 							usuario</p>
-						<a href="EliminarCuentaServlet" class="btn btn-primary">Ir</a>
+						<a href="DeleteUser" class="btn btn-primary">Ir</a>
 					</div>
 				</div>
 			</div>

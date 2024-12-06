@@ -54,7 +54,7 @@ public class Login extends HttpServlet {
 
 		try {
 			// Comprobar si el usuario existe em la db
-			existUserInDB = usuarioDAO.getUserToLogin(userName);
+			existUserInDB = usuarioDAO.validateExistUser(userName);
 			// Si el usuario existe, validar las credenciales
 			if (existUserInDB) {
 				isValidUser = usuarioDAO.validateUserCredentials(userName, password);

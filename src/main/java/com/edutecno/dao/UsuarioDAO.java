@@ -149,6 +149,30 @@ public class UsuarioDAO {
 			return false;
 		}
 	}
+	
+	public boolean updateUser(Usuario user) throws SQLException {
+	    String sql = """
+	        UPDATE usuarios
+	        SET nombre = ?, email = ?, user_name = ?, fecha_nacimiento = ?, password = ?, animal = ?
+	        WHERE user_name = ? AND deleted_at IS NULL
+	    """;
+
+	    try (Connection connection = DBConnection.getConnection();
+	         PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+	        preparedStatement.setString(1, user.getNombre());
+	        preparedStatement.setString(2, user.getEmail());
+	        preparedStatement.setString(3, user.getUsername());
+	        preparedStatement.setDate(4, java.sql.Date.valueOf(user.getFechaNacimiento()));
+	        preparedStatement.setString(5, user.getPassword());
+	        preparedStatement.setString(6, user.getAnimal());
+	        preparedStatement.setString(7, user.getUsername()); // Para el filtro en WHERE
+
+	        int rowsAffected = preparedStatement.executeUpdate();
+	        return rowsAffected > 0;
+	    }
+	}
+
 
 	public boolean deleteUser(String userName) {
 		String sql = """

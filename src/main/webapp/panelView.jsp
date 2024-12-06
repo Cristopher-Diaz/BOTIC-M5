@@ -88,7 +88,7 @@ body {
 						<h5 class="fw-bold">Modificar datos</h5>
 						<p class="text-muted">Usa esta herramienta para EDITAR tu
 							usuario</p>
-						<a href="ModificarDatosServlet" class="btn btn-primary">Ir</a>
+						<a href="EditUser" class="btn btn-primary">Ir</a>
 					</div>
 					<!-- Opción 4 -->
 					<div class="col-md-6 col-lg-3">
